@@ -13,12 +13,18 @@ _registered_user = {}
 
 @pytest.mark.api
 def test_register_new_user(playwright: Playwright):
+    
+    """Verify that a new user can successfully register via the /auth/register endpoint.
+    Expects  201 response and stores the credentials for use in subsequent tests."""
+    
     api = playwright.request.new_context(base_url=BASE)
     email = f"test_{int(time.time())}@example.com"
     password = "abcd12"
+    
     res = api.post("/auth/register", data={
         "name": "Test Student", "email": email, "password": password})
-    assert res.status in (200, 201), f"Register failed: {res.text()}"
+    
+    assert res.status == 201, f"Register failed: {res.text()}"
     _registered_user["email"] = email
     _registered_user["password"] = password
     api.dispose()
@@ -26,6 +32,8 @@ def test_register_new_user(playwright: Playwright):
 
 @pytest.mark.api
 def test_delete_own_account(playwright: Playwright):
+    """Verify that a logged-in user can delete their own account via DELETE /api/profile/me.
+    Logs in with previously registered credentials, obtains a Bearer token, and expects a 204 response."""
     assert _registered_user, "No registered user found — run test_register_new_user first"
 
     api = playwright.request.new_context(base_url=BASE)
