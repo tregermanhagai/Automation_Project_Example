@@ -1,4 +1,8 @@
-def test_simple_login(page):
+
+from playwright.sync_api import Page
+
+
+def test_simple_login(page: Page):
     page.goto("https://practicetestautomation.com/practice-test-login/")
     page.fill("#username", "student")
     page.fill("#password", "Password123")
