@@ -4,7 +4,9 @@ from bank_account import BankAccount
 def test_creat_account():
     """checking create new account"""
     test_account = BankAccount("Yossi", 1000)
+    assert test_account.get_owner_name() == "Yossi"
     assert test_account.get_balance() == 1000
+    
 
 
 

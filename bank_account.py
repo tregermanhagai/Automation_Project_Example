@@ -6,6 +6,9 @@ class BankAccount:
 
         def get_balance(self) -> int:
             return self.balance
+        
+        def get_owner_name(self) -> str:
+            return self.owner_name
 
         # Dynamic function 1
         def deposit(self, amount:int) -> None:
