@@ -53,6 +53,7 @@ def resolve_device(playwright, device_name):
     raise ValueError(f"Unknown device: {device_name!r}")
 
 @pytest.mark.ui
+@pytest.mark.mobile
 @pytest.mark.parametrize(
     "device_name",
     ["iPhone 17", "Samsung 26", "Desktop Chrome"],
