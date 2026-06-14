@@ -12,6 +12,8 @@ password = os.getenv("PASSWORD", "")
 
 @pytest.mark.ui
 def test_login_success(page: Page):
+    """Test that a user can log in successfully with valid credentials."""
+    
     page.goto(f"{BASE}")
     page.get_by_label("Email").fill(email)
     page.locator("[data-test='input-password']").fill(password)
