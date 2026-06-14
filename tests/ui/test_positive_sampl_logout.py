@@ -1,4 +1,5 @@
 import os
+import time
 import pytest
 from dotenv import load_dotenv
 from playwright.sync_api import Page, expect
@@ -10,15 +11,23 @@ email = os.getenv("ADMIN_USER", "")
 password = os.getenv("PASSWORD", "")
 
 
-@pytest.mark.ui
-@pytest.mark.critical
-def test_login_success(page: Page):
+@pytest.fixture
+def login(page: Page):
     """Test that a user can log in successfully with valid credentials."""
-    
     page.goto(f"{BASE}")
     page.get_by_label("Email").fill(email)
     page.locator("[data-test='input-password']").fill(password)
     page.get_by_role("button", name="Sign In").click()
-    # expect(page).to_have_url(f"{BASE}/pages/home.html", timeout=15000)
-    # expect(page.locator("[data-test='nav-system']")).to_be_visible()
-    expect(page.get_by_role("link", name="Logout")).to_be_visible()
+    page.wait_for_load_state("networkidle")
+    yield page
+
+    
+
+@pytest.mark.ui
+@pytest.mark.critical
+@pytest.mark.logout
+def test_logout_success(login: Page):
+    """Test that a user can log out successfully after logging in."""
+    page = login
+    page.locator("[data-test='nav-logout']").click()
+    expect(page).to_have_url("https://sv-students-recommend.onrender.com/pages/login.html")

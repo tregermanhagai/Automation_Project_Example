@@ -1,10 +1,9 @@
 ======================================================================
-TEST RESULTS  (2026-06-10 20:11)
+TEST RESULTS  (2026-06-14 19:17)
 ======================================================================
 TEST                                STATUS NOTE
 ----------------------------------------------------------------------
-test_register_new_user              PASS   
-test_delete_own_account             PASS   
+test_logout_success[chromium]       PASS   
 ----------------------------------------------------------------------
-2/2 passed.  Snapshots in: C:\Data\Projects\AutomationProject2\test-results
+1/1 passed.  Snapshots in: C:\Data\Projects\AutomationProject2\test-results
 ======================================================================
