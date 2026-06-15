@@ -1,8 +1,44 @@
+import email
+import os
+from time import sleep
 import pytest
 from pathlib import Path
 from datetime import datetime
+from dotenv import load_dotenv
+from playwright.sync_api import Page
+
+load_dotenv()
+
+BASE = os.getenv("BASE_URL", "https://sv-students-recommend.onrender.com")
+admin_email = os.getenv("ADMIN_USER", "")
+admin_password = os.getenv("ADMIN_PASSWORD", "")
+student_email = os.getenv("STUDENT_USER", "")
+student_password = os.getenv("STUDENT_PASSWORD", "")
 
 
+@pytest.fixture
+def login_as_admin(page: Page):
+    """Log in and yield the authenticated page."""
+    page.goto(f"{BASE}")
+    page.wait_for_load_state("networkidle")
+    page.get_by_label("Email").fill(admin_email)
+    page.locator("[data-test='input-password']").fill(admin_password)
+    page.get_by_role("button", name="Sign In").click()
+    page.wait_for_load_state("networkidle")
+    yield page
+
+@pytest.fixture
+def login_as_student(page: Page):
+    """Log in and yield the authenticated page."""
+    page.goto(f"{BASE}")
+    page.wait_for_load_state("networkidle")
+    page.get_by_label("Email").fill(student_email)
+    page.locator("[data-test='input-password']").fill(student_password)
+    page.get_by_role("button", name="Sign In").click()
+    page.wait_for_load_state("networkidle")
+    yield page
+    
+    
 # Anchor to the folder where conftest.py lives — not the CWD
 SHOTS = Path(__file__).parent / "test-results"
 SHOTS.mkdir(parents=True, exist_ok=True)

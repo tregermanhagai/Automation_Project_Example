@@ -7,7 +7,7 @@ load_dotenv()
 
 BASE = os.getenv("BASE_URL", "https://sv-students-recommend.onrender.com")
 email = os.getenv("ADMIN_USER", "")
-password = os.getenv("PASSWORD", "")
+password = os.getenv("NEW_ADMIN_PASSWORD", "")
 
 
 # Custom device descriptors for models not in Playwright's registry.

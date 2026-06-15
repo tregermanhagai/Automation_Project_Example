@@ -8,7 +8,7 @@ load_dotenv()
 BASE = os.getenv("BASE_URL", "")
 email = os.getenv("ADMIN_USER", "")
 non_admin_email = os.getenv("NON_ADMIN","")
-password = os.getenv("PASSWORD", "")
+password = os.getenv("NEW_ADMIN_PASSWORD", "")
 
 
 @pytest.fixture
