@@ -23,6 +23,15 @@ def login(page: Page):
 
     
 
+def validate_login_page(page: Page) -> bool:
+    try:
+        expect(page).to_have_url("https://sv-students-recommend.onrender.com/pages/login.html")
+        expect(page).to_have_title("Login - SV Students Recommend")
+        return True
+    except AssertionError:
+        return False
+
+
 @pytest.mark.ui
 @pytest.mark.critical
 @pytest.mark.logout
@@ -30,4 +39,4 @@ def test_logout_success(login: Page):
     """Test that a user can log out successfully after logging in."""
     page = login
     page.locator("[data-test='nav-logout']").click()
-    expect(page).to_have_url("https://sv-students-recommend.onrender.com/pages/login.html")
+    assert validate_login_page(page), "Logout validation failed: URL or title did not match expected login page"
