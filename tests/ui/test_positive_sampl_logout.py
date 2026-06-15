@@ -18,7 +18,7 @@ def validate_login_page(page: Page) -> bool:
 @pytest.mark.ui
 @pytest.mark.critical
 @pytest.mark.logout
-def test_logout_success(login_as_student: Page):
+def test_logout(login_as_student: Page):
     """Test that a user can log out successfully after logging in."""
     page = login_as_student
     page.wait_for_load_state("networkidle")

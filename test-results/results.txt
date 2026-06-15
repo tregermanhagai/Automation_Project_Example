@@ -1,9 +1,9 @@
 ======================================================================
-TEST RESULTS  (2026-06-15 21:03)
+TEST RESULTS  (2026-06-15 21:18)
 ======================================================================
 TEST                                STATUS NOTE
 ----------------------------------------------------------------------
-test_logout_success[chromium]       PASS   
+test_logout[chromium]               FAIL   .venv\Lib\site-packages\playwright\_impl\_connection.py:559: TimeoutError
 ----------------------------------------------------------------------
-1/1 passed.  Snapshots in: C:\Data\Projects\AutomationProject2\test-results
+0/1 passed.  Snapshots in: C:\Data\Projects\AutomationProject2\test-results
 ======================================================================

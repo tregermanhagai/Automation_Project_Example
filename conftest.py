@@ -33,7 +33,8 @@ def login_as_student(page: Page):
     page.goto(f"{BASE}")
     page.wait_for_load_state("networkidle")
     page.get_by_label("Email").fill(student_email)
-    page.locator("[data-test='input-password']").fill(student_password)
+    # page.locator("[data-test='input-password']").fill(student_password)
+    page.locator("[data-test='input-password']").fill("test12345")
     page.get_by_role("button", name="Sign In").click()
     page.wait_for_load_state("networkidle")
     yield page
@@ -58,8 +59,10 @@ def pytest_runtest_makereport(item, call):
     page = item.funcargs.get("page")
     shot_path = ""
     if page is not None:
+        prefix = "failed_" if report.failed else ""
         safe_name = item.name.replace("/", "_").replace("[", "_").replace("]", "")
-        shot_path = SHOTS / f"{safe_name}.png"
+        timestamp = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+        shot_path = SHOTS / f"{prefix}{safe_name}_{timestamp}.png"
         try:
             page.screenshot(path=str(shot_path), full_page=True)
         except Exception as e:
