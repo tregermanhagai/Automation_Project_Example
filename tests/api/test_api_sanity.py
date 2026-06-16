@@ -108,7 +108,7 @@ def test_add_recommendation(playwright: Playwright, auth_token: str):
         "/api/recommendations",
         headers={"authorization": f"Bearer {auth_token}"},
         multipart={
-            "name": "The Pragmatic Programmer",
+            "name": "Class 20 - Test Reommendations",
             "category": "Book",
             "description": "A classic book on software craftsmanship.",
             "recommender_name": "API Tester",
@@ -120,14 +120,45 @@ def test_add_recommendation(playwright: Playwright, auth_token: str):
 
     body = res.json()
     assert "id" in body, "Missing 'id' in response"
-    assert body["name"] == "The Pragmatic Programmer"
+    assert body["name"] == "Class 20 - Test Reommendations"
     assert body["category"] == "Book"
     _data_user["rec_id"] = body["id"]
 
     api.dispose()
 
 
+
 @pytest.mark.api_sanity
+def test_add_comment(playwright: Playwright, auth_token: str):
+    """Verify that an authenticated user can add a comment to a recommendation via POST /api/recommendations/{rec_id}/comments.
+    Expects a 201 response. Depends on test_add_recommendation having run first."""
+    
+
+    api = playwright.request.new_context(base_url=BASE)
+
+    rec_id = _data_user["rec_id"]
+    res = api.post(
+        f"/api/recommendations/{rec_id}/comments",
+        headers={"authorization": f"Bearer {auth_token}"},
+        data={
+            "rating": 5,
+            "comment": "This is a test comment."
+        },
+    )
+    body = res.json()
+    print(f"Add comment response: {body}")
+    assert res.status == 201, f"Add comment failed: {res.text()}"
+    assert body["commenter_name"] == "Hagai Tregerman"
+    api.dispose()
+
+
+
+
+
+
+
+
+# @pytest.mark.api_sanity
 def test_delete_recommendation(playwright: Playwright, auth_token: str):
     """Verify that an authenticated user can delete a recommendation via DELETE /api/recommendations/{rec_id}.
     Expects a 204 response. Depends on test_add_recommendation having run first."""
