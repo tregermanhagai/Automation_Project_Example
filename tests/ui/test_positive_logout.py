@@ -1,4 +1,5 @@
 from operator import contains
+# from time import sleep
 
 import pytest
 from playwright.sync_api import Page, expect
@@ -20,6 +21,7 @@ def test_logout(login_as_admin: Page):
     """Test that a user can log out successfully after logging in."""
     page = login_as_admin
     page.wait_for_load_state("networkidle")
+    # sleep(9)  # Ensure the page is fully loaded before attempting to log out
     page.locator("[data-test='nav-logout']").click()
     page.wait_for_load_state("networkidle")
     assert validate_login_page(page), "Logout validation failed: URL or title did not match expected login page"
