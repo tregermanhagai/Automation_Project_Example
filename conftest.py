@@ -1,15 +1,15 @@
 import email
 import os
+from dotenv import load_dotenv
 from time import sleep
 import pytest
 from pathlib import Path
 from datetime import datetime
-from dotenv import load_dotenv
 from playwright.sync_api import Page
 
 load_dotenv()
 
-BASE = os.getenv("BASE_URL", "https://sv-students-recommend.onrender.com")
+BASE = os.getenv("BASE_URL", "")
 admin_email = os.getenv("ADMIN_USER", "")
 admin_password = os.getenv("ADMIN_PASSWORD", "")
 student_email = os.getenv("STUDENT_USER", "")
@@ -33,8 +33,7 @@ def login_as_student(page: Page):
     page.goto(f"{BASE}")
     page.wait_for_load_state("networkidle")
     page.get_by_label("Email").fill(student_email)
-    # page.locator("[data-test='input-password']").fill(student_password)
-    page.locator("[data-test='input-password']").fill("test12345")
+    page.locator("[data-test='input-password']").fill(student_password)
     page.get_by_role("button", name="Sign In").click()
     page.wait_for_load_state("networkidle")
     yield page

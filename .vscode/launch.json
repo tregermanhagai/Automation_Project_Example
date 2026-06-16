@@ -2,12 +2,12 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug Playwright Tests",
+            "name": "Debug test_logout",
             "type": "debugpy",
             "request": "launch",
             "module": "pytest",
             "args": [
-                "test_simple_login.py",
+                "tests/ui/test_positive_sampl_logout.py::test_logout",
                 "--headed",
                 "-v",
                 "-s"
