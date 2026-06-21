@@ -2,12 +2,12 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug test_logout",
+            "name": "Debug error message",
             "type": "debugpy",
             "request": "launch",
             "module": "pytest",
             "args": [
-                "tests/ui/test_positive_sampl_logout.py::test_logout",
+                "tests/ui/test_Error_Handling.py::test_error_msg_displayed_for_invalid_password_in_registration",
                 "--headed",
                 "-v",
                 "-s"
