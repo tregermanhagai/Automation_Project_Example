@@ -1,9 +1,11 @@
 ======================================================================
-TEST RESULTS  (2026-06-21 18:54)
+TEST RESULTS  (2026-06-21 19:27)
 ======================================================================
 TEST                                STATUS NOTE
 ----------------------------------------------------------------------
-test_error_msg_displayed_for_invalid_password_in_registration[chromium] PASS   
+test_add_recommendation             PASS   
+test_delete_recommendation_negative_no_token PASS   
+test_delete_recommendation          PASS   
 ----------------------------------------------------------------------
-1/1 passed.  Snapshots in: C:\Data\Projects\AutomationProject2\test-results
+3/3 passed.  Snapshots in: C:\Data\Projects\AutomationProject2\test-results
 ======================================================================

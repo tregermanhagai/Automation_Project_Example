@@ -153,11 +153,6 @@ def test_add_comment(playwright: Playwright, auth_token: str):
 
 
 
-
-
-
-
-
 # @pytest.mark.api_sanity
 def test_delete_recommendation(playwright: Playwright, auth_token: str):
     """Verify that an authenticated user can delete a recommendation via DELETE /api/recommendations/{rec_id}.
